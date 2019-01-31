@@ -1,23 +1,27 @@
 struct UnionFind {
-    vector<int> p, r;
-    int gn;
-    UnionFind(int n = 0) : p(n, -1), r(n, 1), gn(n) {}
-    void merge(int a, int b) {
-        int x = group(a), y = group(b);
-        if (x == y) return;  // same
-        gn--;
-        if (r[x] < r[y])
-            p[x] = y;
-        else if (r[x] > r[y])
-            p[y] = x;
-        else {
-            p[x] = y;
-            r[x]++;
+    vector<int> id;
+    vector<vector<int> > groups;
+    int gn; //number of groups
+    UnionFind(int n){
+        id = vector<int>(n);
+        groups = vector<vector<int> >(n);
+        gn = n;
+        for(int i=0;i<n:++i){
+            id[i]=i;
+            groups[i]={i};
         }
     }
-    int group(int a) {
-        if (p[a] == -1) return a;
-        return p[a] = group(p[a]);
+    void unite(int a, int b) {
+        if(same(a,b)) return;
+        gn--;
+        int x = id[a];
+        int y = id[b];
+        if(groups[x].size()<groups[y].size()) swap(x,y);
+        for(int j ; groups[y]){
+            id[j] = x;
+            groups[x].push_back(j);
+        }
+        groups[y].clear();        
     }
-    bool same(int a, int b) { return group(a) == group(b); }
+    bool same(int a, int b) { return id(a) == id(b); }
 };
