@@ -6,7 +6,7 @@ struct UnionFind {
         id = vector<int>(n);
         groups = vector<vector<int> >(n);
         gn = n;
-        for(int i=0;i<n:++i){
+        for(int i=0;i<n;++i){
             id[i]=i;
             groups[i]={i};
         }
@@ -17,11 +17,13 @@ struct UnionFind {
         int x = id[a];
         int y = id[b];
         if(groups[x].size()<groups[y].size()) swap(x,y);
-        for(int j ; groups[y]){
+        for(int j : groups[y]){
             id[j] = x;
             groups[x].push_back(j);
         }
         groups[y].clear();        
     }
-    bool same(int a, int b) { return id(a) == id(b); }
+    bool same(int a, int b) {
+        return id[a] == id[b];
+    }
 };
